@@ -37,7 +37,7 @@ const App = () => {
       <button onClick={fetchDataGet}>fetch data get</button>
       <button onClick={fetchDataPost}>fetch data post</button>
       {(loadingGet || loadingPost || loadingDelete || loadingPut) &&
-        (!errorGet || errorPost || errorDelete || errorPut) && (
+        (!errorGet || !errorPost || !errorDelete || !errorPut) && (
           <h2 style={{ color: "orange" }}>Loading...</h2>
         )}
       {(errorGet || errorPost || errorDelete || errorPut) && (
