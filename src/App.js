@@ -8,34 +8,37 @@ const App = () => {
     error: errorGet,
     loading: loadingGet,
     request: requestGet,
-    fetchDataGet,
-  } = useDataGetter("posts", "get", false, null, null);
+    fetchData: get,
+  } = useDataGetter("posts", "get", false, null);
 
   const {
+    data: dataPost, // new Data
     error: errorPost,
     loading: loadingPost,
     request: requestPost,
-    fetchDataPost,
-  } = useDataGetter("posts", "post", false, postData, null);
+    fetchData: post,
+  } = useDataGetter("posts", "post", false, null);
 
   const {
+    data: dataDelete, // new Data
     error: errorDelete,
     loading: loadingDelete,
     request: requestDelete,
-    fetchDataDelete,
-  } = useDataGetter("posts", "delete", false, null, null);
+    fetchData: remove,
+  } = useDataGetter("posts", "delete", false, null);
 
   const {
+    data: dataPut, // new Data
     error: errorPut,
     loading: loadingPut,
     request: requestPut,
-    fetchDataPut,
-  } = useDataGetter("posts", "put", false, newData, null);
+    fetchData: put,
+  } = useDataGetter("posts", "put", false, null);
 
   return (
     <Fragment>
-      <button onClick={fetchDataGet}>fetch data get</button>
-      <button onClick={fetchDataPost}>fetch data post</button>
+      <button onClick={get}>fetch data get</button>
+      <button onClick={() => post(postData)}>fetch data post</button>
       {(loadingGet || loadingPost || loadingDelete || loadingPut) &&
         (!errorGet || !errorPost || !errorDelete || !errorPut) && (
           <h2 style={{ color: "orange" }}>Loading...</h2>
@@ -54,11 +57,11 @@ const App = () => {
           dataGet.map((item) => (
             <div style={{ margin: "20px" }} key={item.id}>
               id (delete) :{" "}
-              <b onClick={() => fetchDataDelete(item.id)}>{item?.id}</b>{" "}
+              <b onClick={() => remove(null, item.id)}>{item?.id}</b>{" "}
               {/* click for delete with id */}
               <br />
               title (put) :{" "}
-              <span onClick={() => fetchDataPut(item.id)}>
+              <span onClick={() => put(newData, item.id)}>
                 {item?.title}
               </span>{" "}
               {/* click for update title to new title */}
